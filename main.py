@@ -1,3 +1,5 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from sqlalchemy import text
@@ -7,11 +9,15 @@ from src.tasks.router import task_routes
 from src.users.router import user_routes
 from fastapi.middleware.cors import CORSMiddleware
 
-# Create database tables when enabled (recommended only for development)
-if settings.AUTO_CREATE_TABLES:
-    Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Task Management Application")
+@asynccontextmanager
+async def lifespan(_: FastAPI):
+    if settings.AUTO_CREATE_TABLES:
+        Base.metadata.create_all(bind=engine)
+    yield
+
+
+app = FastAPI(title="Task Management Application", lifespan=lifespan)
 app.include_router(task_routes)
 app.include_router(user_routes)
 
