@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     ALGORITHM: str
     SECRET_KEY: str
     EXP_TIME: int
-    CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000"
+    CORS_ORIGINS: str = "http://localhost:3000,http://127.0.0.1:3000,https://tasqmanage.vercel.app"
     AUTO_CREATE_TABLES: bool = False
     DB_USE_NULL_POOL: Optional[bool] = None
     VERCEL: Optional[str] = None

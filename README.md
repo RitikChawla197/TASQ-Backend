@@ -58,6 +58,6 @@ After pushing this repo to GitHub and importing it into Vercel:
 ### 6. Common failure cases
 
 - Missing `DATABASE_URL` or Vercel Postgres connection
-- `CORS_ORIGINS` does not include your frontend Vercel URL
+- `CORS_ORIGINS` does not include your frontend Vercel URL, or includes a trailing slash. Use `https://tasqmanage.vercel.app` (no trailing slash)
 - `AUTO_CREATE_TABLES=false` with an empty database and no migrations yet
 - Using Prisma-specific expectations in a project that is actually SQLAlchemy-based
